@@ -1,0 +1,13 @@
+{
+  "id": "anolis-7",
+  "name": "Anolis OS 7(新)",
+  "family": "Anolis",
+  "majorVersion": 7,
+  "validationFiles": [
+     ".discinfo",
+    "isolinux/vmlinuz",
+    "isolinux/initrd.img"
+  ],
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "Anolis OS 7"
+}

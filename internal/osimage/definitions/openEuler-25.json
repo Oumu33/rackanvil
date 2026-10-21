@@ -1,0 +1,13 @@
+{
+  "id": "openEuler-25",
+  "name": "openEuler-25",
+  "family": "openEuler",
+  "majorVersion": 8,
+  "identityFilePath": ".treeinfo",
+  "identityFileContentRegex": "(?i)openEuler[\\s\\S]*version\\s*=\\s*25",
+  "validationFiles": [
+    ".treeinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img"
+  ]
+}

@@ -1,0 +1,99 @@
+=== M12 from-scratch e2e (final, fixed install.sh) 2026-10-21T13:05:16+00:00 ===
+--- install.sh ---
+[install] SHA256SUMS 校验通过
+[install] 已创建系统用户 deplos
+[install] 二进制与引导资产已安装
+[install] 已写入默认配置 /etc/deplos/server.env（按需修改 DEPLOS_PUBLIC_URL 等）
+[install] 已写入默认配置 /etc/deplos/agent.env
+[install] systemd unit 已注册，deplos-server 已设为开机自启
+启动服务：systemctl start deplos-server
+本机试用 agent：改好 /etc/deplos/agent.env 里的 DEPLOS_SERVER 后，
+执行 systemctl enable --now deplos-agent
+
+===============================================================
+首次启动说明：server 第一次启动（数据库为空）时会自动创建管理员
+账号 admin，并把随机密码打印到日志一次（不写死、无默认密码）：
+systemd 环境：journalctl -u deplos-server，然后搜 INITIAL ADMIN
+手动启动：看 server 输出里 INITIAL ADMIN ACCOUNT CREATED 段落
+登录地址：http://主机IP:9100/ （用户名 admin）
+===============================================================
+PASS
+install exit=0
+--- systemctl start ---
+active
+{"component":"deplos-reimpl-server","status":"ok"}
+
+--- admin bootstrap (journal) ---
+Oct 21 13:05:18 htch-runtime deplos-server[17989]: 2026/10/21 13:05:18 web: INITIAL ADMIN ACCOUNT CREATED
+Oct 21 13:05:18 htch-runtime deplos-server[17989]: 2026/10/21 13:05:18 web:   username: admin
+Oct 21 13:05:18 htch-runtime deplos-server[17989]: 2026/10/21 13:05:18 web:   password: <redacted-throwaway-test-instance>
+Oct 21 13:05:18 htch-runtime deplos-server[17989]: 2026/10/21 13:05:18 web:   (shown once — change it after first login)
+--- enable agent ---
+Created symlink /etc/systemd/system/multi-user.target.wants/deplos-agent.service → /etc/systemd/system/deplos-agent.service.
+active
+--- agent journal ---
+Oct 21 13:05:25 htch-runtime systemd[1]: Started deplos-agent.service - deplos-reimpl node agent (runs on each managed node).
+Oct 21 13:05:25 htch-runtime deplos-agent[18037]: agent: 2026/10/21 13:05:25 deplos-reimpl 1.0.0 (commit nogit, built 2026-10-21T13:04:38Z)
+Oct 21 13:05:25 htch-runtime deplos-agent[18037]: agent: 2026/10/21 13:05:25 first-boot gate: server_ready=true waited=8ms (bound 2m0s)
+Oct 21 13:05:25 htch-runtime deplos-agent[18037]: agent: 2026/10/21 13:05:25 initialize: host_id=host-750ce5c38ecc7bf0 hostname resolved, token acquired (signing enabled)
+Oct 21 13:05:25 htch-runtime deplos-agent[18037]: agent: 2026/10/21 13:05:25 checkin ok: 0 task(s)
+--- registered hosts ---
+[{"ID":"host-750ce5c38ecc7bf0","Hostname":"htch-runtime","MACs":["72:dc:7c:34:2f:fd"],"IPs":["198.19.0.2","fd8b:4f84:7d32:99::2","fe80::70dc:7cff:fe34:2ffd"],"CPUModel":"","MemoryMB":0,"Token":"e5c4c6164fb08c663ca03bf2d631901e","SignKey":"5ed88fc5752676ccf7f30d7049734ca2796caa5a58bdc515de75d47c5b59fc5a","RegisteredAt":"2026-10-21T13:05:25Z","LastCheckin":"2026-10-21T13:05:25Z"}]
+
+--- web login ---
+login POST -> 302 (302=ok)
+资产列表
+--- enqueue task via web form ---
+redirect: http://127.0.0.1:9100/tasks/task-947f94b63ded975c
+task_id=task-947f94b63ded975c
+--- task result ---
+状态:</b> <span class="badge warn">pending
+<h3>stdout</h3><pre></pre>
+<h3>stderr</h3><pre></pre>
+--- task final ---
+<div class="card">
+<div><b>命令:</b> <code>echo hello-deplos &amp;&amp; uname -a</code></div>
+--- task stdout ---
+<h3>stdout</h3><pre>hello-deplos
+Linux htch-runtime 7.0.0-39-generic #1 SMP PREEMPT_DYNAMIC Thu Sep 24 08:42:15 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+</pre>
+{"ID":"task-947f94b63ded975c","HostID":"host-750ce5c38ecc7bf0","Type":"shell","Command":"echo hello-deplos \u0026\u0026 uname -a","TimeoutSec":120,"Status":"done","Stdout":"hello-deplos\nLinux htch-runtime 7.0.0-39-generic #1 SMP PREEMPT_DYNAMIC Thu Sep 24 08:42:15 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n","Stderr":"","ExitCode":0,"Error":"","CreatedAt":"2026-10-21T13:05:42Z","UpdatedAt":"2026-10
+--- bad-disk demo host (real protocol) ---
+demo host: host-2b3790e39e9da026
+metrics ack: {'ack': True}
+health: {"active_alarms":[{"ID":"alarm-724e668788793c57","HostID":"host-2b3790e39e9da026","Kind":"smart.sda","Severity":"critical","Message":"[critical] SMART overall-health self-assessment: FAILED — replace drive immediately; [critical] SMART 187 Reported_Uncorrectable_Errors=59352: uncorrectable sectors seen; [critical] SMART 197 Current_Pending_Sector=25: many sectors awaiting remap; [warning] SMART 198 Offline_Uncorrectable=8: offline uncorrectable sectors; [warning] SMART 5 Reallocated_Sector_Ct=12: remapped sectors present; [warning] SMART 188 Command_Timeout=3: command timeouts seen","CreatedAt
+HOSTID=host-2b3790e39e9da026
+--- upgrade.sh (same-version) ---
+[upgrade] 新包校验通过
+[upgrade] 当前版本：deplos-server deplos-reimpl 1.0.0 (commit nogit, built 2026-10-21T13:04:38Z)
+[upgrade] 目标版本：deplos-server deplos-reimpl 1.0.0 (commit nogit, built 2026-10-21T13:04:38Z)
+[upgrade] 旧版本已备份到 /var/lib/deplos/backups/upgrade-20261021-131714
+[upgrade] 新版本文件已就位
+[upgrade] 健康检查通过（http://127.0.0.1:9100/healthz）
+
+PASS: 升级完成。旧版本备份在 /var/lib/deplos/backups/upgrade-20261021-131714
+手动回滚：停服后把 /var/lib/deplos/backups/upgrade-20261021-131714 里的两个二进制拷回 /usr/lib/deplos 再起服即可。
+upgrade exit=0
+--- post-upgrade ---
+active
+{"component":"deplos-reimpl-server","status":"ok"}
+
+deplos-server deplos-reimpl 1.0.0 (commit nogit, built 2026-10-21T13:04:38Z)
+upgrade-20261021-131714
+--- screenshots (headless Chromium, own console only) ---
+method: file:// redirect entry (LNA workaround, see M12-REPORT), in-page navigation, CDP capture
+total 424
+drwxrws--- 1 root nogroup   228 Oct 21 13:16 .
+drwxrws--- 1 root nogroup   532 Oct 21 13:06 ..
+-rw-rw---- 1 root nogroup 10087 Oct 21 13:16 01-login.png
+-rw-rw---- 1 root nogroup 46355 Oct 21 13:16 02-dashboard.png
+-rw-rw---- 1 root nogroup 46704 Oct 21 13:16 03-hosts.png
+-rw-rw---- 1 root nogroup 61848 Oct 21 13:16 04-host-detail.png
+-rw-rw---- 1 root nogroup 47155 Oct 21 13:16 05-task-detail.png
+-rw-rw---- 1 root nogroup 92494 Oct 21 13:16 06-alarms.png
+-rw-rw---- 1 root nogroup 42968 Oct 21 13:16 07-license.png
+-rw-rw---- 1 root nogroup 68104 Oct 21 13:16 08-orch.png
+--- e2e summary ---
+install.sh PASS / server via systemd active / healthz ok / agent registered host-750ce5c38ecc7bf0 (signing enabled)
+web login 302 ok / task task-947f94b63ded975c done exit=0 stdout verified / bad-disk alarms raised (critical smart.sda)
+upgrade.sh PASS (backup upgrade-20261021-131714, health ok)

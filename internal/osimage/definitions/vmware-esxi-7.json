@@ -1,0 +1,13 @@
+{
+  "id": "vmware-esxi-7",
+  "name": "VMware ESXi 7.0",
+  "family": "VMware",
+  "majorVersion": 8,
+  "identityFilePath": "EFI/BOOT/BOOT.CFG",
+  "identityFileContentRegex": "7\\.\\d",
+  "validationFiles": [
+    "EFI/BOOT/BOOT.CFG",
+    "EFI/BOOT/BOOTX64.EFI",
+    "efi/boot/boot.cfg" 
+  ]
+}

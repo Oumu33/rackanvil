@@ -1,0 +1,18 @@
+# REAL SAMPLE — verbatim from Oracle's public ILOM documentation.
+# Source: https://docs.oracle.com/cd/E19121-01/sf.x4100/819-3284-17/819-3284-17IMPI.html
+# Command: ipmitool -I lanplus -H <IPADDR> -U root -P changeme sdr elist full
+fp.t_amb | 0Ah | ok | 12.0 | 22 degrees C
+ps.t_amb | 11h | ok | 10.0 | 21 degrees C
+ps0.f0.speed | 15h | ok | 10.0 | 11000 RPM
+ps1.f0.speed | 19h | ok | 10.1 | 0 RPM
+mb.t_amb | 1Ah | ok | 7.0 | 25 degrees C
+mb.v_bat | 1Bh | ok | 7.0 | 3.18 Volts
+mb.v_+3v3stby | 1Ch | ok | 7.0 | 3.17 Volts
+mb.v_+3v3 | 1Dh | ok | 7.0 | 3.34 Volts
+mb.v_+5v | 1Eh | ok | 7.0 | 5.04 Volts
+mb.v_+12v | 1Fh | ok | 7.0 | 12.22 Volts
+mb.v_-12v | 20h | ok | 7.0 | -12.20 Volts
+p0.t_core | 2Bh | ok | 3.0 | 44 degrees C
+p0.v_+1v5 | 2Ch | ok | 3.0 | 1.56 Volts
+p1.t_core | 34h | ok | 3.1 | 40 degrees C
+ft0.fm0.f0.speed | 43h | ok | 29.0 | 6000 RPM

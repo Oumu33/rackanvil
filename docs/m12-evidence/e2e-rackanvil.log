@@ -1,0 +1,72 @@
+注：本日志为改名后最终构建（含登录页品牌标题补强）的从零实测；此前一版构建已先行跑通同一流程（install/agent/任务/告警全绿），因登录页品牌补强重打包后重跑本轮为准。
+=== RackAnvil rename e2e (condensed) 2026-10-21T13:41:29Z ===
+--- install.sh ---
+[install] SHA256SUMS 校验通过
+[install] 已创建系统用户 rackanvil
+[install] 二进制与引导资产已安装
+[install] 已写入默认配置 /etc/rackanvil/server.env（按需修改 RACKANVIL_PUBLIC_URL 等）
+[install] 已写入默认配置 /etc/rackanvil/agent.env
+[install] systemd unit 已注册，rackanvil-server 已设为开机自启
+启动服务：systemctl start rackanvil-server
+本机试用 agent：改好 /etc/rackanvil/agent.env 里的 RACKANVIL_SERVER 后，
+执行 systemctl enable --now rackanvil-agent
+
+===============================================================
+首次启动说明：server 第一次启动（数据库为空）时会自动创建管理员
+账号 admin，并把随机密码打印到日志一次（不写死、无默认密码）：
+systemd 环境：journalctl -u rackanvil-server，然后搜 INITIAL ADMIN
+手动启动：看 server 输出里 INITIAL ADMIN ACCOUNT CREATED 段落
+登录地址：http://主机IP:9100/ （用户名 admin）
+===============================================================
+PASS
+install exit=0
+--- systemctl start rackanvil-server ---
+active
+{"component":"rackanvil-server","status":"ok"}
+
+admin bootstrap: INITIAL ADMIN ACCOUNT CREATED (password captured, redacted here)
+--- enable agent ---
+active
+[agent] Oct 21 13:40:47 htch-runtime systemd[1]: Stopped rackanvil-agent.service - rackanvil node agent (runs on each managed node).
+[agent] Oct 21 13:41:34 htch-runtime systemd[1]: Started rackanvil-agent.service - rackanvil node agent (runs on each managed node).
+[agent] Oct 21 13:41:34 htch-runtime rackanvil-agent[4457]: agent: 2026/10/21 13:41:34 rackanvil 1.0.0 (commit nogit, built 2026-10-21T13:40:52Z)
+[agent] Oct 21 13:41:34 htch-runtime rackanvil-agent[4457]: agent: 2026/10/21 13:41:34 first-boot gate: server_ready=true waited=1ms (bound 2m0s)
+[agent] Oct 21 13:41:34 htch-runtime rackanvil-agent[4457]: agent: 2026/10/21 13:41:34 initialize: host_id=host-419274b558f5c3be hostname resolved, token acquired (signing enabled)
+[agent] Oct 21 13:41:34 htch-runtime rackanvil-agent[4457]: agent: 2026/10/21 13:41:34 checkin ok: 0 task(s)
+agent host: host-419274b558f5c3be
+--- demo bad-disk host (real protocol) ---
+demo host: host-a8a3e9b67f960aaf
+metrics ack: {'ack': True}
+metrics ack: {'ack': True}
+metrics ack: {'ack': True}
+metrics ack: {'ack': True}
+health: {"active_alarms":[{"ID":"alarm-52d95200bfdef9a4","HostID":"host-a8a3e9b67f960aaf","Kind":"smart.sda","Severity":"critical","Message":"[critical] SMART overall-health self-assessment: FAILED — replace drive immediately; [critical] SMART 187 Reported_Uncorrectable_Errors=59352: uncorrectable sectors seen; [critical] SMART 197 Current_Pending_Sector=25: many sectors awaiting remap; [warning] SMART 19
+demo host: host-a8a3e9b67f960aaf
+--- web login ---
+login POST -> 302 (302=ok)
+--- enqueue task via web form ---
+task_id=task-98f08a4248af52cc
+poll 1: pending 0
+poll 2: pending 0
+poll 3: pending 0
+poll 4: pending 0
+poll 5: pending 0
+poll 6: pending 0
+poll 7: pending 0
+poll 8: done 0
+task final: done exit 0
+stdout: hello-rackanvil
+Linux htch-runtime 7.0.0-39-generic #1 SMP PREEMPT_DYNAMIC Thu Sep 24 08:42:15 UTC 2026 x86_64 x86_64 x8
+=== e2e PASS: instance left running for screenshots ===
+--- screenshots (headless Chromium 152, own console only, post-rename build) ---
+method: file:// redirect entry (LNA workaround, same as M12), in-page navigation, CDP capture; 每张标题均为 "RackAnvil 控制台"，逐张看图验收：导航品牌 RackAnvil、无旧名残留
+01-login.png      /login 登录页（标题 "RackAnvil 控制台" 可见品牌）
+02-dashboard.png  /dashboard 监控看板（htch-runtime 真实采样曲线）
+03-hosts.png      /hosts 资产列表（2 台真实主机：htch-runtime + demo-baddisk）
+04-host-detail.png /hosts/<agent> 主机详情（真实采集 + done 任务记录）
+05-task-detail.png /tasks/<task> 任务详情（done/exit 0/真实 stdout hello-rackanvil）
+06-alarms.png     /hosts/<demo> 演示主机详情（critical smart.sda 告警卡片，系统对真实协议上报的反应）
+07-license.png    /license 许可管理
+08-orch.png       /orch 交付编排
+--- teardown ---
+实测实例已拆除（停服/删 unit/删安装目录与数据/删 rackanvil 系统用户），证据留存本日志。

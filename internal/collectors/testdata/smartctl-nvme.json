@@ -1,0 +1,31 @@
+# SYNTHETIC — 格式仿真，非真实采集。
+# Schema follows smartmontools' documented --json output for NVMe devices.
+# Values are derived from the REAL text sample nvme-smart-log.txt (Hetzner docs)
+# in this directory. Note: smartctl reports NVMe temperature in Kelvin.
+{
+  "json_format_version": [1, 0],
+  "device": {
+    "name": "/dev/nvme0n1",
+    "type": "nvme"
+  },
+  "model_name": "SAMSUNG MZVLB256HAHQ-000L7",
+  "serial_number": "S42GMY9M141281",
+  "firmware_version": "0L2QEXD7",
+  "nvme_smart_health_information_log": {
+    "critical_warning": 0,
+    "temperature": 302,
+    "available_spare": 100,
+    "available_spare_threshold": 10,
+    "percentage_used": 2,
+    "data_units_read": 5749452,
+    "data_units_written": 10602948,
+    "host_read_commands": 77809121,
+    "host_write_commands": 153405213,
+    "controller_busy_time": 756,
+    "power_cycles": 1719,
+    "power_on_hours": 1311,
+    "unsafe_shutdowns": 129,
+    "media_errors": 0,
+    "num_err_log_entries": 1243
+  }
+}

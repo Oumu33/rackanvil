@@ -1,0 +1,11 @@
+# SYNTHETIC — 格式仿真，非真实采集。
+# Format follows `lspci -nn -D` output. PCI IDs are REAL and publicly documented:
+#   1000:005d = Broadcom/LSI MegaRAID SAS 9361-8i (cf. H3C doc: Vendor Id 0x1000,
+#               Device Id 0x5D in raid/testdata/storcli-c0-show.txt)
+#   1000:0079 = Dell PERC H730 (Mini) — documented in Dell/Broadcom PCI ID lists
+#   144d:a804 = Samsung NVMe SSD 970 EVO (documented)
+#   15b3:1013 = Mellanox ConnectX-4 (documented)
+0000:3b:00.0 RAID bus controller [0104]: Broadcom / LSI MegaRAID SAS 9361-8i [1000:005d] (rev 02)
+0000:04:00.0 RAID bus controller [0104]: Dell PERC H730 Mini [1000:0079] (rev 01)
+0000:65:00.0 Non-Volatile memory controller [0108]: Samsung Electronics Co Ltd NVMe SSD Controller SM981/PM981/PM983 [144d:a804]
+0000:b3:00.0 Ethernet controller [0200]: Mellanox Technologies MT27700 Family [ConnectX-4] [15b3:1013]

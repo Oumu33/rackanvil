@@ -1,0 +1,13 @@
+{
+  "id": "anolis-23",
+  "name": "Anolis OS 23(新)",
+  "family": "Anolis",
+  "majorVersion": 23,
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",      
+    "images/pxeboot/initrd.img"
+  ],
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "Anolis OS 23"
+}

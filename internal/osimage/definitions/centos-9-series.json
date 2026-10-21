@@ -1,0 +1,13 @@
+{
+  "id": "centos-9-series",
+  "name": "CentOS 9 系",
+  "family": "Centos",
+  "majorVersion": 9,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "CentOS Stream 9",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img"
+  ]
+}

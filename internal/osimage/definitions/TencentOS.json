@@ -1,0 +1,14 @@
+{
+  "id": "tencentos",
+  "name": "TencentOS 4.0 系",
+  "family": "tencentos",
+  "majorVersion": 8,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "TencentOS Server 4",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "BaseOS"
+  ]
+}

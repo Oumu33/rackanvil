@@ -1,0 +1,95 @@
+### rackanvil M3 — Debian bookworm unattended install (preseed)
+### Rendered per host: Hostname={{.Hostname}} HostID={{.HostID}}
+### Fetched by debian-installer via preseed/url=.../preseed/<agent-token>.cfg
+
+d-i debian-installer/locale string en_US
+d-i debian-installer/language string en
+d-i debian-installer/country string US
+d-i keyboard-configuration/xkb-keymap select us
+
+d-i netcfg/choose_interface select auto
+d-i netcfg/get_hostname string {{.Hostname}}
+d-i netcfg/get_domain string local
+d-i netcfg/wireless_wep string
+
+d-i mirror/country string manual
+d-i mirror/http/hostname string {{.MirrorHost}}
+d-i mirror/http/directory string {{.MirrorDir}}
+d-i mirror/http/proxy string
+d-i mirror/suite string bookworm
+
+# Speed up provisioning: exclude docs/man/locales from all debs (common
+# real-world practice for fast bare-metal provisioning; shrinks downloads).
+d-i preseed/early_command string mkdir -p /etc/dpkg/dpkg.cfg.d; printf 'path-exclude=/usr/share/doc/*\npath-exclude=/usr/share/man/*\npath-exclude=/usr/share/locale/*\n' > /etc/dpkg/dpkg.cfg.d/99excludes
+d-i base-installer/install-recommends boolean false
+
+d-i clock-setup/utc boolean true
+d-i time/zone string UTC
+# M5-D speed: NTP sync inside the sandbox guest has no reachable NTP server;
+# ntpdate just stalls the installer. Clock correctness is irrelevant for PXE
+# provisioning tests (in production deployments this stays true).
+d-i clock-setup/ntp boolean false
+d-i popularity-contest/participate boolean false
+
+# Partitioning: single disk, atomic recipe, no questions.
+d-i partman-auto/method string regular
+d-i partman-auto/choose_recipe select atomic
+d-i partman-partitioning/confirm_write_new_label boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm boolean true
+d-i partman/confirm_nooverwrite boolean true
+
+# Accounts: random root password injected per install (shown on the job page).
+d-i passwd/root-password password {{.RootPW}}
+d-i passwd/root-password-again password {{.RootPW}}
+d-i passwd/user-fullname string rackanvil
+d-i passwd/username string rackanvil
+d-i passwd/user-password password {{.RootPW}}
+d-i passwd/user-password-again password {{.RootPW}}
+d-i user-setup/allow-password-weak boolean true
+
+# Minimal package set: no desktop tasks.
+tasksel tasksel/first multiselect
+d-i pkgsel/include string openssh-server curl
+d-i pkgsel/upgrade select none
+d-i apt-setup/use_mirror boolean true
+# M5-D speed: test template takes NO extra apt sources (security/updates add
+# a full metadata fetch + scan under TCG emulation; the production template
+# should put "security, updates" back).
+d-i apt-setup/services-select multiselect
+
+d-i grub-installer/only_debian boolean true
+d-i grub-installer/with_other_os boolean true
+d-i grub-installer/bootdev string default
+
+# Post-install: drop our agent into the new system, enable it, and tell the
+# server the install finished (clears install_pending -> orchestrator proceeds).
+# M6-D ROOT CAUSE (found the hard way): the install-done POST must come only
+# AFTER `sync`. install-done is the signal for the orchestrator to power-cycle
+# the host; everything written to /target before it (agent binary, unit file)
+# may still sit in the guest page cache under ext4 delayed allocation, and a
+# power cut at that moment leaves 0-byte files behind (the agent then never
+# starts: systemd reports the empty unit as "masked"). sync first, post last.
+# M11: the agent download is retried (3 tries, 5s apart — the pattern the
+# vendor's newer first-boot build adopted after field failures) and VERIFIED
+# against the server-issued sha256 before anything proceeds. install-done is
+# posted only when verification succeeded: a corrupt or missing agent must
+# fail the install loudly (orchestrator timeout), never report success.
+d-i preseed/late_command string \
+    mkdir -p /target/tmp ; \
+    wget --tries=3 --waitretry=5 -O /target/usr/local/bin/rackanvil-agent {{.ServerURL}}/agent/download && \
+    wget --tries=3 --waitretry=5 -q -O /target/tmp/rackanvil-agent.sha256 {{.ServerURL}}/agent/download.sha256 && \
+    (cd /target/usr/local/bin && sha256sum -c /target/tmp/rackanvil-agent.sha256) && \
+    touch /target/tmp/rackanvil-agent.verified ; \
+    chmod +x /target/usr/local/bin/rackanvil-agent ; \
+    mkdir -p /target/etc/rackanvil ; \
+    printf '%s\n' '{{.ServerURL}}' > /target/etc/rackanvil/server.url ; \
+    printf '[Unit]\nDescription=rackanvil agent\nAfter=network-online.target\nWants=network-online.target\n[Service]\nExecStart=/usr/local/bin/rackanvil-agent --server {{.ServerURL}} --interval 30s\nRestart=always\nRestartSec=5\n[Install]\nWantedBy=multi-user.target\n' > /target/etc/systemd/system/rackanvil-agent.service ; \
+    in-target systemctl enable rackanvil-agent.service ; \
+    sync ; sleep 2 ; \
+    test -f /target/tmp/rackanvil-agent.verified && wget -q -O /dev/null --header='Content-Type: application/json' --post-data='{"host_id":"{{.HostID}}","agent_token":"{{.Token}}"}' {{.ServerURL}}/api/v1/client/install-done ; \
+    echo rackanvil late_command finished (install-done posted only if agent checksum verified)
+
+d-i finish-install/reboot_in_progress note
+d-i cdrom-detect/eject boolean false
+d-i debian-installer/exit/poweroff boolean false

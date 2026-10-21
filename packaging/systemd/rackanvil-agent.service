@@ -1,0 +1,22 @@
+[Unit]
+Description=rackanvil node agent (runs on each managed node)
+Documentation=file:/usr/share/doc/rackanvil/USER-GUIDE.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# agent 以 root 运行（设计使然）：它要在被管节点上执行下发的 shell 任务、
+# 读 SMART、写网络配置——与任何同类节点代理相同的信任级别。
+# 只应把 agent 装到你自己管理的节点上。
+EnvironmentFile=/etc/rackanvil/agent.env
+ExecStart=/usr/lib/rackanvil/rackanvil-agent \
+  -server=${RACKANVIL_SERVER} \
+  -interval=${RACKANVIL_INTERVAL} \
+  -metrics-interval=${RACKANVIL_METRICS_INTERVAL}
+Restart=always
+RestartSec=3
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

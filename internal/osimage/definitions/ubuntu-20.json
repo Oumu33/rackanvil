@@ -1,0 +1,15 @@
+{
+  "id": "ubuntu-20.x",
+  "name": "Ubuntu Server 20.x (Autoinstall)",
+  "family": "Ubuntu",
+  "majorVersion": 20,
+
+  "identityFilePath": ".disk/info",
+  "identityFileContentRegex": "Ubuntu-Server 20",
+
+  "validationFiles": [
+    ".disk/info",
+    "casper/vmlinuz",
+    "casper/initrd"
+  ]
+}

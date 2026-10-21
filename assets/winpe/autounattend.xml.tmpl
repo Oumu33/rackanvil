@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- autounattend.xml template (rackanvil, M7; M8-aligned).
+     Factory evidence: the vendor renders "templates/windows_autounattend.xml.tmpl"
+     (Go text/template, with a `contains` FuncMap helper) and the file is
+     delivered into WinPE at X:\Windows\System32\autounattend.xml — in the
+     vendor chain it travels AES-encrypted and is decrypted there by
+     decryptor.exe (see install.bat JIT evidence, M8). The vendor's full
+     template text was recovered in M8 (three variants, 245/276/332
+     lines, archived in deplos-reversing/m8-evidence/regions/); this
+     asset aligns its distinctive fragments: the en-US/zh-CN language
+     detection on the asset name, the $bootMode default "uefi", the
+     China Standard Time zone, and the FirstLogonCommands chain
+     (firewall off, winrm quickconfig, post-install.ps1 pulled from
+     {{.BaseURL}}/api/v1/ipxe/win/post-install.ps1?mac=..&asset_id=..).
+     Deliberate divergence: the vendor embeds the task's administrator
+     password in plaintext ({{.Task.RootPassword}}); we ship NO
+     credentials — the operator's own process sets them. -->
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    {{ $isEnglish := or (contains .AssetName "en-us") (contains .AssetName "en_us") (contains .AssetName "EN-US") (contains .AssetName "English") }}
+    {{ $lang := "zh-CN" }}
+    {{ if $isEnglish }}
+        {{ $lang = "en-US" }}
+    {{ end }}
+    {{ $bootMode := "uefi" }}
+    {{ if .BootMode }}{{ $bootMode = .BootMode }}{{ end }}
+  <settings pass="windowsPE">
+    <component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <SetupUILanguage>
+        <UILanguage>{{$lang}}</UILanguage>
+      </SetupUILanguage>
+      <InputLocale>{{$lang}}</InputLocale>
+      <SystemLocale>{{$lang}}</SystemLocale>
+      <UILanguage>{{$lang}}</UILanguage>
+      <UserLocale>{{$lang}}</UserLocale>
+    </component>
+    <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <ImageInstall>
+        <OSImage>
+          <InstallFrom>
+            <MetaData wcm:action="add" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+              <Key>/IMAGE/INDEX</Key>
+              <Value>{{.ImageIndex}}</Value>
+            </MetaData>
+          </InstallFrom>
+          <InstallToAvailablePartition>true</InstallToAvailablePartition>
+        </OSImage>
+      </ImageInstall>
+      <UserData>
+        <AcceptEula>true</AcceptEula>
+      </UserData>
+    </component>
+  </settings>
+  <settings pass="specialize">
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <ComputerName>{{.Hostname}}</ComputerName>
+      <TimeZone>China Standard Time</TimeZone>
+    </component>
+  </settings>
+  <settings pass="oobeSystem">
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <FirstLogonCommands>
+        <SynchronousCommand wcm:action="add" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+          <Order>1</Order>
+          <CommandLine>netsh advfirewall set allprofiles state off</CommandLine>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+          <Order>2</Order>
+          <CommandLine>cmd.exe /c winrm quickconfig -q</CommandLine>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+          <Order>3</Order>
+          <CommandLine>powershell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri '{{.BaseURL}}/api/v1/ipxe/win/post-install.ps1?mac={{.MAC}}&amp;asset_id={{.MachineID}}' -OutFile 'C:\Windows\Temp\post-install.ps1'; &amp; 'C:\Windows\Temp\post-install.ps1'"</CommandLine>
+        </SynchronousCommand>
+      </FirstLogonCommands>
+    </component>
+  </settings>
+</unattend>

@@ -1,0 +1,13 @@
+{
+  "id": "suse-leap-15",
+  "name": "openSUSE Leap 15系列",
+  "family": "openSUSE",
+  "majorVersion": 15,
+  "identityFilePath": "media.1/media",
+  "identityFileContentRegex": "openSUSE-Leap-15",
+  "validationFiles": [
+    "media.1/media",
+    "boot/x86_64/loader/linux",
+    "boot/x86_64/loader/initrd"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "openSUSE-Tumbleweed",
+  "name": "openSUSE-Tumbleweed系列",
+  "family": "openSUSE",
+  "majorVersion": 15,
+  "identityFilePath": "media.1/media",
+  "identityFileContentRegex": "openSUSE-Tumbleweed",
+  "validationFiles": [
+    "media.1/media",
+    "boot/x86_64/loader/linux",
+    "boot/x86_64/loader/initrd"
+  ]
+}

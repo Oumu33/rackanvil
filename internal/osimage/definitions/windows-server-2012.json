@@ -1,0 +1,13 @@
+{
+  "id": "windows-server2012",
+  "name": "Windows Server 2012",
+  "family": "Windows",
+  "majorVersion": 12,
+  "validationFiles": [
+    "boot/bcd",
+    "boot/boot.sdi",
+    "sources/boot.wim"
+  ],
+  "identityFilePath": "sources/install.wim|sources/install.esd", 
+  "identityFileContentRegex": "." 
+}

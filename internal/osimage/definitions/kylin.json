@@ -1,0 +1,14 @@
+
+  {
+    "id": "kylin-v10",
+    "name": "Kylin Linux Advanced Server V10",
+    "family": "Kylin",
+    "majorVersion": 10,
+    "validationFiles": [
+      ".treeinfo",
+      "images/pxeboot/vmlinuz",
+      "images/pxeboot/initrd.img"
+    ],
+    "identityFilePath": ".treeinfo",
+    "identityFileContentRegex": "(?i)Kylin.*10"
+  }

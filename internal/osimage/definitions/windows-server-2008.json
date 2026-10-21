@@ -1,0 +1,13 @@
+{
+  "id": "windows-server2008",
+  "name": "Windows Server 2008",
+  "family": "Windows",
+  "majorVersion": 2008,
+  "validationFiles": [
+    "boot/bcd",
+    "boot/boot.sdi",
+    "sources/boot.wim"
+  ],
+  "identityFilePath": "sources/install.wim|sources/install.esd", 
+  "identityFileContentRegex": "." 
+}

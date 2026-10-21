@@ -1,0 +1,14 @@
+{
+  "id": "rocky-8",
+  "name": "Rocky Linux 8 系",
+  "family": "Rocky",
+  "majorVersion": 8,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "Rocky Linux 8",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "BaseOS"
+  ]
+}

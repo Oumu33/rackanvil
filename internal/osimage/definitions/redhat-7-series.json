@@ -1,0 +1,14 @@
+{
+  "id": "rhel-7-series",
+  "name": "Red Hat 7 系",
+  "family": "RedHat",
+  "majorVersion": 7,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "Red Hat Enterprise Linux 7",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "isolinux"
+  ]
+}

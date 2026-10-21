@@ -1,0 +1,18 @@
+CLI Version = 007.2612.0000.0000 Sep 12, 2024
+Operating system = Linux 5.10.0
+Controller = 0
+Status = Success
+Description = Show Drive Information Succeeded.
+
+
+Drive /c0/e252/s0 :
+State :
+=============
+EID:Slt DID State DG       Size Intf Med SED_Type PI  SeSz Model            Sp LU/NSPU   Type
+252:0     9 Onln   0  7.276 TB SATA HDD -        N   512B ST8000NM0055      U  -         -
+252:1    10 Onln   0  7.276 TB SATA HDD -        N   512B ST8000NM0055      U  -         -
+252:2    11 UBad   -  3.638 TB SAS  SSD -        N   512B MG07SCA14TE       U  -         -
+Detailed Status :
+=============
+Drive /c0/e252/s0 State :
+Success

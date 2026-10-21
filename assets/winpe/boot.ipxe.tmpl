@@ -1,0 +1,27 @@
+#!ipxe
+# rackanvil WinPE boot chain — aligned to the vendor's verbatim
+# wimboot script template (M8: recovered in full, 497 bytes, from the
+# vendor server binary; evidence m8-evidence/regions/
+# wimboot_script.ipxe.tmpl + handleIPXEBootScript strings). The
+# vendor's %s slots are the per-asset file URLs; ours point at this
+# server's /winpe/ file area and the vendor-verbatim routes
+# /api/v1/ipxe/win/winpeshl.ini and /api/v1/ipxe/win/install.bat.
+# boot.wim / install.wim / decryptor.exe are operator-provisioned from
+# a licensed Windows image and are NEVER bundled here.
+echo Booting Windows Installer (Detected {{.MAC}})...
+kernel {{.Server}}/winpe/wimboot || goto failed
+initrd {{.Server}}/winpe/BCD BCD || goto failed
+initrd {{.Server}}/winpe/boot.sdi boot.sdi || goto failed
+initrd {{.Server}}/winpe/boot.wim boot.wim || goto failed
+initrd {{.Server}}/api/v1/ipxe/win/winpeshl.ini winpeshl.ini || goto failed
+initrd {{.Server}}/api/v1/ipxe/win/install.bat install.bat || goto failed
+initrd {{.Server}}/winpe/decryptor.exe decryptor.exe || goto failed
+boot || goto failed
+
+:failed
+echo ============================================
+echo      CRITICAL ERROR: BOOT FAILED
+echo ============================================
+echo Check server logs.
+sleep 30
+reboot

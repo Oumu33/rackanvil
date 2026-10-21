@@ -1,0 +1,13 @@
+{
+  "id": "windows-server2019",
+  "name": "Windows Server 2019",
+  "family": "Windows",
+  "majorVersion": 2019,
+  "validationFiles": [
+    "boot/bcd",
+    "boot/boot.sdi",
+    "sources/boot.wim"
+  ],
+  "identityFilePath": "sources/install.wim|sources/install.esd", 
+  "identityFileContentRegex": "." 
+}

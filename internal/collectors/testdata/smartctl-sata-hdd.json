@@ -1,0 +1,36 @@
+# SYNTHETIC — 格式仿真，非真实采集。
+# Schema follows smartmontools' documented --json output (stable since smartmontools 7.0).
+# Values are derived from the REAL text sample smartctl-sata-hdd-failing.txt
+# (Seagate ST500LM021-1KJ152) in this directory.
+{
+  "json_format_version": [1, 0],
+  "smartctl": {
+    "version": [7, 3],
+    "argv": ["smartctl", "--json", "-a", "/dev/sda"],
+    "exit_status": 0
+  },
+  "device": {
+    "name": "/dev/sda",
+    "type": "sat"
+  },
+  "model_name": "ST500LM021-1KJ152",
+  "serial_number": "W62DD2AZ",
+  "firmware_version": "0003LIM1",
+  "smart_status": {
+    "passed": true
+  },
+  "ata_smart_attributes": {
+    "revision": 10,
+    "table": [
+      {"id": 1, "name": "Raw_Read_Error_Rate", "raw": {"value": 6391505, "string": "6391505"}},
+      {"id": 5, "name": "Reallocated_Sector_Ct", "raw": {"value": 0, "string": "0"}},
+      {"id": 9, "name": "Power_On_Hours", "raw": {"value": 21892, "string": "21892 (3 79 0)"}},
+      {"id": 187, "name": "Reported_Uncorrect", "raw": {"value": 59352, "string": "59352"}},
+      {"id": 188, "name": "Command_Timeout", "raw": {"value": 210460672117, "string": "210460672117"}},
+      {"id": 194, "name": "Temperature_Celsius", "raw": {"value": 42, "string": "42 (0 17 0 0 0)"}},
+      {"id": 197, "name": "Current_Pending_Sector", "raw": {"value": 16, "string": "16"}},
+      {"id": 198, "name": "Offline_Uncorrectable", "raw": {"value": 16, "string": "16"}},
+      {"id": 199, "name": "UDMA_CRC_Error_Count", "raw": {"value": 0, "string": "0"}}
+    ]
+  }
+}

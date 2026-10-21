@@ -1,0 +1,23 @@
+# REAL SAMPLE — verbatim from Hetzner's public dedicated-server docs.
+# Source: https://docs.hetzner.com/robot/dedicated-server/maintenance/nvme/
+# Command: nvme smart-log /dev/nvme0n1  (text mode)
+Smart Log for NVME device:nvme0n1 namespace-id:ffffffff
+critical_warning                    : 0
+temperature                         : 29 C
+available_spare                     : 100%
+available_spare_threshold           : 10%
+percentage_used                     : 0%
+data_units_read                     : 113,446
+data_units_written                  : 48,760
+host_read_commands                  : 111,504,973
+host_write_commands                 : 41,507,430
+controller_busy_time                : 1,395
+power_cycles                        : 7
+power_on_hours                      : 395
+unsafe_shutdowns                    : 0
+media_errors                        : 0
+num_err_log_entries                 : 0
+Warning Temperature Time            : 0
+Critical Composite Temperature Time : 0
+Temperature Sensor 1                : 29 C
+Temperature Sensor 2                : 30 C

@@ -1,0 +1,5 @@
+REAL SAMPLE — captured from a live server, published as test fixture in
+prometheus-community/node-exporter-textfile-collector-scripts (mock/fixtures/).
+Source: https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/tree/master/mock/fixtures
+Command: storcli /cALL show all J   (resp. /cALL/eALL/sALL show all J)
+Controller in fixture: PRAID EP420i (HPE rebrand of MegaRAID).

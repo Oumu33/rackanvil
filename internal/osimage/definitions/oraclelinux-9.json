@@ -1,0 +1,14 @@
+{
+  "id": "oracle-9",
+  "name": "Oracle Linux R9 系",
+  "family": "Oracle",
+  "majorVersion": 9,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "Oracle Linux 9",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "BaseOS"
+  ]
+}

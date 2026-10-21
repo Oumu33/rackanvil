@@ -1,0 +1,13 @@
+{
+  "id": "windows-server2025",
+  "name": "Windows Server 2025",
+  "family": "Windows",
+  "majorVersion": 2025,
+  "validationFiles": [
+    "boot/bcd",
+    "boot/boot.sdi",
+    "sources/boot.wim"
+  ],
+  "identityFilePath": "sources/install.wim|sources/install.esd", 
+  "identityFileContentRegex": "." 
+}

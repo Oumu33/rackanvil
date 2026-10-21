@@ -1,0 +1,15 @@
+{
+  "id": "ubuntu-22.x",
+  "name": "Ubuntu Server 22.x (Autoinstall)",
+  "family": "Ubuntu",
+  "majorVersion": 22,
+
+  "identityFilePath": ".disk/info",
+  "identityFileContentRegex": "Ubuntu-Server 22.*LTS",
+
+  "validationFiles": [
+    ".disk/info",
+    "casper/vmlinuz",
+    "casper/initrd"
+  ]
+}

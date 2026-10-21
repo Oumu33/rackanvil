@@ -1,0 +1,14 @@
+{
+  "id": "rhel-9-series",
+  "name": "Red Hat 9 系",
+  "family": "RedHat",
+  "majorVersion": 9,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "Red Hat Enterprise Linux 9",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "LICENSE"
+  ]
+}

@@ -1,0 +1,40 @@
+LSI Corporation SAS3 IR Configuration Utility.
+Version 19.00.00.00 (2021.09.21)
+
+Read configuration has been initiated for controller 0
+
+----------------------------------------------------------------------------
+Controller information
+----------------------------------------------------------------------------
+  Controller type                         : SAS3008
+  BIOS version                            : 18.00.00.00
+----------------------------------------------------------------------------
+Device is a Hard disk
+  Enclosure #                             : 1
+  Slot #                                  : 0
+  SAS Address                             : 5000cca2-5e09-3c21
+  State                                   : Optimal (OPT)
+  Size (in MB)/(in sectors)               : 7630885/15628053167
+  Manufacturer                            : HGST
+  Model Number                            : HUH721010ALE600
+  Firmware Revision                         : A3E8
+  Serial No                               : 2TGDTXKD
+  Protocol                                : SAS
+  Drive Type                              : SAS_HDD
+
+Device is a Enclosure services device
+  Enclosure #                             : 2
+  Slot #                                  : 255
+  State                                   : Standby (SBY)
+
+Device is a Hard disk
+  Enclosure #                             : 1
+  Slot #                                  : 1
+  State                                   : Optimal (OPT)
+  Size (in MB)/(in sectors)               : 3815447/7814037167
+  Manufacturer                            : ATA
+  Model Number                            : Samsung SSD 860
+  Firmware Revision                         : RVT04B6Q
+  Serial No                               : S3Z8NB0K123456
+  Protocol                                : SATA
+  Drive Type                              : SATA_SSD

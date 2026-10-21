@@ -1,0 +1,23 @@
+# SYNTHETIC — 格式仿真，非真实采集。
+# Schema follows nvme-cli's documented `-o json` output for `nvme smart-log`.
+# Values are derived from the REAL text sample nvme-smart-log.txt (Hetzner docs).
+# Note: nvme-cli JSON reports temperature in Kelvin, percentage as a plain number.
+{
+  "critical_warning": 0,
+  "temperature": 302,
+  "avail_spare": 100,
+  "spare_thresh": 10,
+  "percent_used": 2,
+  "data_units_read": 113446,
+  "data_units_written": 48760,
+  "host_read_commands": 111504973,
+  "host_write_commands": 41507430,
+  "ctrl_busy_time": 1395,
+  "power_cycles": 7,
+  "power_on_hours": 395,
+  "unsafe_shutdowns": 0,
+  "media_errors": 0,
+  "num_err_log_entries": 0,
+  "warning_temp_time": 0,
+  "critical_comp_time": 0
+}

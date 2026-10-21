@@ -1,0 +1,13 @@
+{
+  "id": "BCLinux",
+  "name": "BCLinux",
+  "family": "BCLinux",
+  "majorVersion": 8,
+  "validationFiles": [
+    ".treeinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img"
+  ],
+  "identityFilePath": ".treeinfo",
+  "identityFileContentRegex": "(?i)(BigCloud|BCLinux|bclinux)"
+}

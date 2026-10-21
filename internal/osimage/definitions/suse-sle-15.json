@@ -1,0 +1,13 @@
+{
+  "id": "suse-sle-15",
+  "name": "SUSE - SLE-15系列",
+  "family": "SUSE",
+  "majorVersion": 15,
+  "identityFilePath": "media.1/media",
+  "identityFileContentRegex": "SLE-15",
+  "validationFiles": [
+    "media.1/media",
+    "boot/x86_64/loader/linux",
+    "boot/x86_64/loader/initrd"
+  ]
+}

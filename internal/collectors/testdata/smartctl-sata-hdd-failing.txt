@@ -1,0 +1,90 @@
+# REAL SAMPLE — verbatim excerpt from a public blog post.
+# Source: https://blog.toadjaune.eu/posts/2021/06-14_btrfs_and_data_corruption/
+# Device: Seagate ST500LM021-1KJ152 (failing laptop HDD, 500GB).
+# Note: error-log section truncated to first entry; INFO + SMART DATA sections verbatim.
+# This drive reports overall-health PASSED while SMART 187/197/198 scream failure —
+# a perfect regression case for failure prediction.
+smartctl 6.6 2017-11-05 r4594 [x86_64-linux-4.19.0-16-amd64] (local build)
+Copyright (C) 2002-17, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Model Family:     Seagate Laptop HDD
+Device Model:     ST500LM021-1KJ152
+Serial Number:    W62DD2AZ
+LU WWN Device Id: 5 000c50 09c3f8b1a
+Firmware Version: 0003LIM1
+User Capacity:    500,107,862,016 bytes [500 GB]
+Sector Sizes:     512 bytes logical, 4096 bytes physical
+Rotation Rate:    7200 rpm
+Form Factor:      2.5 inches
+Device is:        In smartctl database [for details use: -P show]
+ATA Version is:   ATA8-ACS T13/1699-D revision 4
+SATA Version is:  SATA 3.0, 6.0 Gb/s (current: 1.5 Gb/s)
+Local Time is:    Sun Jun 20 15:36:21 2021 CEST
+SMART support is: Available - device has SMART capability.
+SMART support is: Enabled
+
+=== START OF READ SMART DATA SECTION ===
+SMART overall-health self-assessment test result: PASSED
+
+General SMART Values:
+Offline data collection status:  (0x82)	Offline data collection activity
+					was completed without error.
+					Auto Offline Data Collection: Enabled.
+Self-test execution status:      (   0)	The previous self-test routine completed
+					without error or no self-test has ever
+					been run.
+Total time to complete Offline
+data collection: 		(    0) seconds.
+Offline data collection
+capabilities: 			 (0x7b) SMART execute Offline immediate.
+					Auto Offline data collection on/off support.
+					Suspend Offline collection upon new
+					command.
+					Offline surface scan supported.
+					Self-test supported.
+					Conveyance Self-test supported.
+					Selective Self-test supported.
+SMART capabilities:            (0x0003)	Saves SMART data before entering
+					power-saving mode.
+					Supports SMART auto save timer.
+Error logging capability:        (0x01)	Error logging supported.
+					General Purpose Logging supported.
+Short self-test routine
+recommended polling time: 	 (   1) minutes.
+Extended self-test routine
+recommended polling time: 	 (  81) minutes.
+Conveyance self-test routine
+recommended polling time: 	 (   2) minutes.
+SCT capabilities: 	       (0x1031)	SCT Status supported.
+					SCT Feature Control supported.
+					SCT Data Table supported.
+
+SMART Attributes Data Structure revision number: 10
+Vendor Specific SMART Attributes with Thresholds:
+ID# ATTRIBUTE_NAME          FLAG     VALUE WORST THRESH TYPE      UPDATED  WHEN_FAILED RAW_VALUE
+  1 Raw_Read_Error_Rate     0x000f   074   074   034    Pre-fail  Always       -       6391505
+  3 Spin_Up_Time            0x0003   099   098   000    Pre-fail  Always       -       0
+  4 Start_Stop_Count        0x0032   100   100   020    Old_age   Always       -       106
+  5 Reallocated_Sector_Ct   0x0033   100   100   036    Pre-fail  Always       -       0
+  7 Seek_Error_Rate         0x000f   080   060   030    Pre-fail  Always       -       4406996728
+  9 Power_On_Hours          0x0032   076   076   000    Old_age   Always       -       21892 (3 79 0)
+ 10 Spin_Retry_Count        0x0013   100   100   097    Pre-fail  Always       -       0
+ 12 Power_Cycle_Count       0x0032   100   100   020    Old_age   Always       -       105
+184 End-to-End_Error        0x0032   100   100   099    Old_age   Always       -       0
+187 Reported_Uncorrect      0x0032   001   001   000    Old_age   Always       -       59352
+188 Command_Timeout         0x0032   100   086   000    Old_age   Always       -       210460672117
+189 High_Fly_Writes         0x003a   100   100   000    Old_age   Always       -       0
+190 Airflow_Temperature_Cel 0x0022   058   048   045    Old_age   Always       -       42 (Min/Max 36/52)
+191 G-Sense_Error_Rate      0x0032   100   100   000    Old_age   Always       -       13
+192 Power-Off_Retract_Count 0x0032   100   100   000    Old_age   Always       -       42
+193 Load_Cycle_Count        0x0032   080   080   000    Old_age   Always       -       41519
+194 Temperature_Celsius     0x0022   042   052   000    Old_age   Always       -       42 (0 17 0 0 0)
+196 Reallocated_Event_Count 0x000f   078   078   030    Pre-fail  Always       -       19997 (49479 0)
+197 Current_Pending_Sector  0x0012   100   099   000    Old_age   Always       -       16
+198 Offline_Uncorrectable   0x0010   100   099   000    Old_age   Offline      -       16
+199 UDMA_CRC_Error_Count    0x003e   200   200   000    Old_age   Always       -       0
+254 Free_Fall_Sensor        0x0032   100   100   000    Old_age   Always       -       0
+
+SMART Error Log Version: 1
+ATA Error Count: 59345 (device log contains only the most recent five errors)

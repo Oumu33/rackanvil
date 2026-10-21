@@ -1,0 +1,13 @@
+{
+  "id": "Debian13",
+  "name": "Debian13",
+  "family": "Debian",
+  "majorVersion": 13,
+  "identityFilePath": ".disk/info",
+  "identityFileContentRegex": "Debian GNU/Linux 13.*",
+  "validationFiles": [
+    ".disk/info",
+    "install.amd/vmlinuz",
+    "install.amd/initrd.gz"
+  ]
+}

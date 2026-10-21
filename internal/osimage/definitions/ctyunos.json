@@ -1,0 +1,13 @@
+{
+  "id": "Ctyuno",
+  "name": "ctyunos",
+  "family": "Ctyunos",
+  "majorVersion": 8,
+  "validationFiles": [
+    ".treeinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img"
+  ],
+  "identityFilePath": ".treeinfo",
+  "identityFileContentRegex": "(?i)ctyunos.*"
+}

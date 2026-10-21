@@ -1,0 +1,47 @@
+# REAL SAMPLE — verbatim from H3C's public 9361-series configuration guide.
+# Source: https://www.h3c.com/en/d_202310/1955075_294551_0.htm
+# Command: storcli64 /c0 show   (text mode; note: no trailing J)
+# Controller: AVAGO MegaRAID SAS 9361-8i, SN SK64909030, FW 4.680.00-8555
+Generating detailed summary of the adapter, it may take a while to complete.
+CLI Version = 007.1017.0000.0000 May 10, 2019
+Operating system = Linux 4.18.0-193.el8.x86_64
+Controller = 0
+Status = Success
+Description = None
+Product Name = AVAGO MegaRAID SAS 9361-8i
+Serial Number = SK64909030
+SAS Address = 500605b00c980df0
+PCI Address = 00:3b:00:00
+System Time = 03/08/2022 20:23:05
+Mfg. Date = 12/22/16
+Controller Time = 03/08/2022 12:23:05
+FW Package Build = 24.21.0-0148
+BIOS Version = 6.36.00.3_4.19.08.00_0x06180205
+FW Version = 4.680.00-8555
+Driver Name = megaraid_sas
+Driver Version = 07.710.50.00-rc1
+Current Personality = RAID-Mode
+Vendor Id = 0x1000
+Device Id = 0x5D
+SubVendor Id = 0x1000
+SubDevice Id = 0x9361
+Host Interface = PCI-E
+Device Interface = SAS-12G
+Bus Number = 59
+Device Number = 0
+Function Number = 0
+Physical Drives = 2
+
+PD LIST :
+=======
+--------------------------------------------------------------------------------
+EID:Slt DID State DG       Size Intf Med SED PI SeSz Model            Sp Type
+--------------------------------------------------------------------------------
+2:8      39 UGood  -  5.457 TB SATA HDD N  N  512B ST6000NM0115-1YZ110 U  -
+2:23     61 UGood  -  1.818 TB SATA HDD N  N  512B ST2000NM0125-1YZ104 U  -
+--------------------------------------------------------------------------------
+EID=Enclosure Device ID|Slt=Slot No.|DID=Device ID|DG=DriveGroup
+DHS=Dedicated Hot Spare|UGood=Unconfigured Good|GHS=Global Hotspare
+UBad=Unconfigured Bad|Onln=Online|Offln=Offline|Intf=Interface
+Med=Media Type|SED=Self Encryptive Drive|PI=Protection Info
+SeSz=Sector Size|Sp=Spun|U=Up|D=Down|T=Transition|F=Foreign

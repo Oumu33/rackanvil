@@ -1,0 +1,13 @@
+{
+  "id": "centos-8-series",
+  "name": "CentOS 8 系",
+  "family": "Centos",
+  "majorVersion": 8,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "CentOS Linux 8",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img"
+  ]
+}

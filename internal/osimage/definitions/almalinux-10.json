@@ -1,0 +1,13 @@
+{
+  "id": "almalinux-10",
+  "name": "AlmaLinux 10 系",
+  "family": "almalinux",
+  "majorVersion": 8,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "AlmaLinux 10",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img"
+  ]
+}

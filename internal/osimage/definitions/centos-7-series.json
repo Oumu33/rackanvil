@@ -1,0 +1,14 @@
+{
+  "id": "centos-7-series",
+  "name": "Centos 7 系",
+  "family": "Centos",
+  "majorVersion": 7,
+  "identityFilePath": ".treeinfo",
+  "identityFileContentRegex": "CentOS-7",
+  "validationFiles": [
+    ".treeinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "isolinux"
+  ]
+}

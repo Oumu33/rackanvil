@@ -1,0 +1,14 @@
+{
+  "id": "rhel-8-series",
+  "name": "Red Hat 8 系",
+  "family": "RedHat",
+  "majorVersion": 8,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "Red Hat Enterprise Linux 8",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "BaseOS"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "rocky-9",
+  "name": "Rocky Linux 9 系",
+  "family": "Rocky",
+  "majorVersion": 9,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "Rocky Linux 9",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "BaseOS"
+  ]
+}

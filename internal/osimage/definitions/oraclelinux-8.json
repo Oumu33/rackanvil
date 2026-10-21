@@ -1,0 +1,14 @@
+{
+  "id": "oracle-8",
+  "name": "Oracle Linux R8 系",
+  "family": "Oracle",
+  "majorVersion": 8,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "Oracle Linux 8",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "BaseOS"
+  ]
+}

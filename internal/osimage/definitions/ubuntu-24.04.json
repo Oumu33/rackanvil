@@ -1,0 +1,15 @@
+{
+  "id": "ubuntu-24.x",
+  "name": "Ubuntu Server 24.x (Autoinstall)",
+  "family": "Ubuntu",
+  "majorVersion": 24,
+
+  "identityFilePath": ".disk/info",
+  "identityFileContentRegex": "Ubuntu-Server 24",
+
+  "validationFiles": [
+    ".disk/info",
+    "casper/vmlinuz",
+    "casper/initrd"
+  ]
+}

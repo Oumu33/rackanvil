@@ -1,0 +1,14 @@
+{
+  "id": "proxmox-ve",
+  "name": "Proxmox VE",
+  "family": "Proxmox",
+  "majorVersion": 8,
+  "validationFiles": [
+    "",
+    "boot/linux26",
+    "boot/initrd.img"
+  ],
+  "identityFilePath": "EULA|.pve-cd-id.txt",
+  "identityFileContentRegex": "(?i)proxmox",
+  "isUnpackMode": true
+}

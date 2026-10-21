@@ -1,0 +1,20 @@
+# build / release products
+/dist/
+*.tar.gz
+*.db
+*.db-shm
+*.db-wal
+
+# boot assets: downloaded from the Debian mirror by scripts/fetch-assets.sh
+# at release time (verified against Debian's official SHA256SUMS); the
+# release tarballs contain them, the git tree does not.
+assets/debian-bookworm/vmlinuz
+assets/debian-bookworm/initrd.img
+assets/debian-bookworm-arm64/linux
+assets/debian-bookworm-arm64/initrd.gz
+assets/debian-bookworm-arm64/bootnetaa64.efi
+assets/debian-bookworm-arm64/grubaa64.efi
+
+# local dev / test scratch
+/.muse-github-snapshot-sync.json
+.*test*/

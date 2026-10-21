@@ -1,0 +1,13 @@
+{
+  "id": "uos-20",
+  "name": "UOS Server 20",
+  "family": "UOS",
+  "majorVersion": 20,
+  "validationFiles": [
+    ".treeinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img"
+  ],
+  "identityFilePath": ".treeinfo",
+  "identityFileContentRegex": "(?i)family\\s*=\\s*UOS[\\s\\S]*version\\s*=\\s*20"
+}

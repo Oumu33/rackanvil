@@ -1,0 +1,13 @@
+{
+  "id": "windows-11",
+  "name": "Windows 11",
+  "family": "Windows",
+  "majorVersion": 11,
+  "validationFiles": [
+    "boot/bcd",
+    "boot/boot.sdi",
+    "sources/boot.wim"
+  ],
+  "identityFilePath": "sources/install.wim|sources/install.esd",
+  "identityFileContentRegex": ".*"
+}

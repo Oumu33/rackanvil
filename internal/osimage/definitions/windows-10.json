@@ -1,0 +1,13 @@
+{
+  "id": "windows-10",
+  "name": "Windows 10",
+  "family": "Windows",
+  "majorVersion": 10,
+  "validationFiles": [
+    "boot/bcd",
+    "boot/boot.sdi",
+    "sources/boot.wim"
+  ],
+  "identityFilePath": "sources/install.wim|sources/install.esd",
+  "identityFileContentRegex": ".*"
+}

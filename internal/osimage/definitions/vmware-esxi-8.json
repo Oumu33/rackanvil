@@ -1,0 +1,13 @@
+{
+  "id": "vmware-esxi-8",
+  "name": "VMware ESXi 8.0",
+  "family": "VMware",
+  "majorVersion": 8,
+  "identityFilePath": "EFI/BOOT/BOOT.CFG",
+  "identityFileContentRegex": "8\\.\\d",
+  "validationFiles": [
+    "EFI/BOOT/BOOT.CFG",
+    "EFI/BOOT/BOOTX64.EFI",
+    "efi/boot/boot.cfg" 
+  ]
+}

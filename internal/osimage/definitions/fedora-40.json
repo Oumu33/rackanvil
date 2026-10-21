@@ -1,0 +1,14 @@
+{
+  "id": "fedora-40",
+  "name": "Fedora Server 40 系",
+  "family": "Fedora",
+  "majorVersion": 7,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "Fedora 4",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "Packages"
+  ]
+}

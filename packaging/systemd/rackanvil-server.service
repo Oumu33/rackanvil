@@ -1,0 +1,42 @@
+[Unit]
+Description=rackanvil management server (clean-room bare-metal automation)
+Documentation=file:/usr/share/doc/rackanvil/DEPLOY.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=rackanvil
+Group=rackanvil
+EnvironmentFile=/etc/rackanvil/server.env
+# 全部参数走 -flag=value 形式：可选参数为空时等价于不传（代码默认值）。
+ExecStart=/usr/lib/rackanvil/rackanvil-server \
+  -addr=${RACKANVIL_ADDR} \
+  -public-url=${RACKANVIL_PUBLIC_URL} \
+  -db=${RACKANVIL_DB} \
+  -assets=${RACKANVIL_ASSETS} \
+  -preseed-dir=${RACKANVIL_PRESEED_DIR} \
+  -agent-bin=${RACKANVIL_AGENT_BIN} \
+  -mirror-host=${RACKANVIL_MIRROR_HOST} \
+  -mirror-dir=${RACKANVIL_MIRROR_DIR} \
+  -dhcp=${RACKANVIL_DHCP} \
+  -dhcp-proxy=${RACKANVIL_DHCP_PROXY} \
+  -dhcp-server-ip=${RACKANVIL_DHCP_SERVER_IP} \
+  -dhcp-pool-start=${RACKANVIL_DHCP_POOL_START} \
+  -dhcp-pool-end=${RACKANVIL_DHCP_POOL_END} \
+  -license-pubkey=${RACKANVIL_LICENSE_PUBKEY} \
+  -license=${RACKANVIL_LICENSE_FILE} \
+  -log-requests=${RACKANVIL_LOG_REQUESTS}
+WorkingDirectory=/var/lib/rackanvil
+Restart=on-failure
+RestartSec=3
+# 启用 -dhcp=true 时监听 UDP 67（特权端口）：以非 root 用户 + 环境能力集放行。
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/rackanvil
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

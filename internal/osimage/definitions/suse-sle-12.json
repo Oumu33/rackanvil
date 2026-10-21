@@ -1,0 +1,13 @@
+{
+  "id": "suse-sle-12",
+  "name": "SUSE - SLE-12系列",
+  "family": "SUSE",
+  "majorVersion": 12,
+  "identityFilePath": "media.1/build",
+  "identityFileContentRegex": "SLE-12",
+  "validationFiles": [
+    "media.1/build",
+    "boot/x86_64/loader/linux",
+    "boot/x86_64/loader/initrd"
+  ]
+}

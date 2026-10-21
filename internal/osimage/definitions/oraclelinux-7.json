@@ -1,0 +1,14 @@
+{
+  "id": "oracle-7",
+  "name": "Oracle Linux R7 系",
+  "family": "Oracle",
+  "majorVersion": 7,
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "OL-7",
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz",
+    "images/pxeboot/initrd.img",
+    "isolinux"
+  ]
+}

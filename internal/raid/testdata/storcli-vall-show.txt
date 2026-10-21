@@ -1,0 +1,13 @@
+# REAL SAMPLE — verbatim from Aerospike's public SSD planning guide.
+# Source: https://aerospike.com/docs/database/8.0.0/manage/planning/ssd/lsi-megacli
+# Command: storcli64 /c0/dall show all  (VD LIST section, text mode)
+VD LIST :
+=======
+----------------------------------------------------------------
+DG/VD TYPE  State Access Consist Cache  Cac sCC       Size Name
+----------------------------------------------------------------
+0/0   RAID0 Optl  RW     Yes     NRWTD  -   OFF  465.25 GB
+1/6   RAID0 Optl  RW     Yes     NRWTD  -   OFF  146.625 GB
+16/20 RAID0 Optl  RW     Yes     RaAWBD -   OFF   372.0 GB r0
+17/1  RAID0 Optl  RW     Yes     NRWTD  -   OFF  446.625 GB
+----------------------------------------------------------------

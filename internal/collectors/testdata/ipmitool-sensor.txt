@@ -1,0 +1,19 @@
+# REAL SAMPLE — verbatim from a public server forum post (Supermicro host).
+# Source: https://forums.servethehome.com/index.php?goto/post&id=99882
+# Command: ipmitool sensor  (10-column threshold format)
+CPU Temp         | 50.000     | degrees C  | ok    | 0.000     | 0.000     | 0.000     | 99.000    | 104.000   | 104.000
+PCH Temp         | 42.000     | degrees C  | ok    | 0.000     | 5.000     | 16.000    | 90.000    | 95.000    | 100.000
+System Temp      | 34.000     | degrees C  | ok    | -10.000   | -5.000    | 0.000     | 80.000    | 85.000    | 90.000
+Peripheral Temp  | 32.000     | degrees C  | ok    | -10.000   | -5.000    | 0.000     | 80.000    | 85.000    | 90.000
+SAS2 Temp        | 51.000     | degrees C  | ok    | -5.000    | 0.000     | 5.000     | 100.000   | 105.000   | 110.000
+DIMMA1 Temp      | 40.000     | degrees C  | ok    | -5.000    | 0.000     | 5.000     | 80.000    | 85.000    | 90.000
+DIMMA2 Temp      | na         |            | na    | na        | na        | na        | na        | na        | na
+DIMMB1 Temp      | 39.000     | degrees C  | ok    | -5.000    | 0.000     | 5.000     | 80.000    | 85.000    | 90.000
+DIMMB2 Temp      | na         |            | na    | na        | na        | na        | na        | na        | na
+FAN1             | 1500.000   | RPM        | ok    | 300.000   | 500.000   | 700.000   | 25300.000 | 25400.000 | 25500.000
+FAN2             | 2800.000   | RPM        | ok    | 300.000   | 500.000   | 700.000   | 25300.000 | 25400.000 | 25500.000
+FAN3             | na         |            | na    | na        | na        | na        | na        | na        | na
+FAN4             | 1700.000   | RPM        | ok    | 300.000   | 500.000   | 700.000   | 25300.000 | 25400.000 | 25500.000
+FANA             | 2800.000   | RPM        | ok    | 300.000   | 500.000   | 700.000   | 25300.000 | 25400.000 | 25500.000
+FANB             | 1800.000   | RPM        | ok    | 300.000   | 500.000   | 700.000   | 25300.000 | 25400.000 | 25500.000
+12V              | 11.937     | Volts      | ok    | 10.173    | 10.299    | 10.740    | 12.945    | 13.260    | 13.386

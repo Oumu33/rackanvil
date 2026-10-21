@@ -1,0 +1,13 @@
+{
+  "id": "anolis-8",
+  "name": "Anolis OS 8.10(新)",
+  "family": "Anolis",
+  "majorVersion": 8,
+  "validationFiles": [
+    ".discinfo",
+    "images/pxeboot/vmlinuz-5.10.134-18.an8.x86_64",      
+    "images/pxeboot/initrd-5.10.134-18.an8.x86_64.img"
+  ],
+  "identityFilePath": ".discinfo",
+  "identityFileContentRegex": "Anolis OS 8"
+}
